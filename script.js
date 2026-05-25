@@ -27,6 +27,9 @@ let items = []
 // 一致後ロック
 let foundLocked = false
 
+// 検索中ロック
+let isSearching = false
+
 // OpenCV読み込み待機
 async function waitForOpenCV() {
   return new Promise(resolve => {
@@ -133,6 +136,9 @@ async function startCamera() {
     // ロック解除
     foundLocked = false
 
+    // 検索ロック解除
+    isSearching = false
+
     const guide =
       document.getElementById(
         'camera-guide'
@@ -173,8 +179,11 @@ async function startCamera() {
 // 撮影
 async function capturePhoto() {
 
-  // 一致後ロック
-  if (foundLocked) {
+  // 一致後 or 検索中ロック
+  if (
+    foundLocked ||
+    isSearching
+  ) {
     return
   }
 
@@ -252,6 +261,13 @@ async function capturePhoto() {
 
 // 検索
 async function search(blob) {
+
+  // 多重実行防止
+  if (isSearching) {
+    return
+  }
+
+  isSearching = true
 
   loading.classList.remove(
     'hidden'
@@ -360,6 +376,8 @@ async function search(blob) {
       result.innerHTML =
         '<p>該当なし</p>'
 
+      isSearching = false
+
       return
     }
 
@@ -409,6 +427,8 @@ async function search(blob) {
       )
     }
 
+    isSearching = false
+
   } catch (err) {
 
     console.error(err)
@@ -419,6 +439,8 @@ async function search(blob) {
 
     result.innerHTML =
       '<p>検索エラー</p>'
+
+    isSearching = false
   }
 }
 
