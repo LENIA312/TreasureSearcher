@@ -1,9 +1,10 @@
 [
   {
-    "id": "herite6",
-    "name": "X:26.3 Y:30.8 Z:1.3",
-    "image": "./assets/herite6.png",
+    "id": "herite4",
+    "position": "④(X:16.8 Y:35.8 Z:0.0)",
+    "image": "./assets/herite4.png",
     "description": "ヘリテージファウンド",
-    "detail": ""
+    "detail": "G17",
+    "mapImage":"herite.jpg"
   }
 ]

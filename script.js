@@ -368,7 +368,7 @@ async function search(blob) {
 
     result.innerHTML = `
       <img
-        src="${bestItem.image}"
+        src="${bestItem.mapImage}"
         class="result-image"
       >
 
