@@ -373,7 +373,7 @@ async function search(blob) {
       >
 
       <h2>
-        ${bestItem.name}
+        ${bestItem.position}
       </h2>
 
       <p>
