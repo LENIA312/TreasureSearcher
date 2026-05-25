@@ -1,10 +1,66 @@
 [
   {
+    "id": "herite1",
+    "position": "①(X:9.1 Y:21.3 Z:0.3)",
+    "image": "./assets/herite1.png",
+    "description": "ヘリテージファウンド",
+    "detail": "G17",
+    "mapImage": "herite.jpg"
+  },
+  {
+    "id": "herite2",
+    "position": "②(X:16.6 Y:13.1 Z:0.3)",
+    "image": "./assets/herite2.jpg",
+    "description": "ヘリテージファウンド",
+    "detail": "G17",
+    "mapImage": "herite.jpg"
+  },
+  {
+    "id": "herite3",
+    "position": "③(X:17.2 Y:22.3 Z:0.4)",
+    "image": "./assets/herite3.png",
+    "description": "ヘリテージファウンド",
+    "detail": "G17",
+    "mapImage": "herite.jpg"
+  },
+  {
     "id": "herite4",
     "position": "④(X:16.8 Y:35.8 Z:0.0)",
     "image": "./assets/herite4.png",
     "description": "ヘリテージファウンド",
     "detail": "G17",
-    "mapImage":"herite.jpg"
-  }
+    "mapImage": "herite.jpg"
+  },
+  {
+    "id": "herite5",
+    "position": "⑤(X:22.0 Y:19.0 Z:1.0)",
+    "image": "./assets/herite5.png",
+    "description": "ヘリテージファウンド",
+    "detail": "G17",
+    "mapImage": "herite.jpg"
+  },
+  {
+    "id": "herite5",
+    "position": "⑥(X:26.3 Y:30.8 Z:1.3)",
+    "image": "./assets/herite6.png",
+    "description": "ヘリテージファウンド",
+    "detail": "G17",
+    "mapImage": "herite.jpg"
+  },
+  {
+    "id": "herite5",
+    "position": "⑦(X:31.1 Y:8.3 Z:1.4)",
+    "image": "./assets/herite7.png",
+    "description": "ヘリテージファウンド",
+    "detail": "G17",
+    "mapImage": "herite.jpg"
+  },
+  {
+    "id": "herite5",
+    "position": "⑧(X:35.7 Y:25.5 Z:1.6)",
+    "image": "./assets/herite8.png",
+    "description": "ヘリテージファウンド",
+    "detail": "G17",
+    "mapImage": "herite.jpg"
+  },
 ]
