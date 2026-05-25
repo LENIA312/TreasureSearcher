@@ -1,66 +1,61 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>画像検索MVP</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<div class="container">
-  <h1>地図どこ君</h1>
+  <div class="container">
+    <h1>地図どこ君</h1>
 
-  <div class="panel">
+    <div class="panel">
 
-    <div id="mobile-area" class="hidden">
-      <button id="camera-btn">
-        カメラ撮影を開始
-      </button>
-<div id="video-wrapper">
+      <div id="mobile-area" class="hidden">
+        <button id="camera-btn">
+          カメラ撮影を開始
+        </button>
+        <div id="video-wrapper">
 
-  <video
-    id="video"
-    autoplay
-    playsinline
-  ></video>
+          <video id="video" autoplay playsinline></video>
 
-  <div id="camera-guide"></div>
+          <div id="camera-guide"></div>
 
-</div>
+        </div>
 
-      <button id="capture-btn" class="hidden">
-        撮影して認識
-      </button>
+        <button id="capture-btn" class="hidden">
+          撮影して認識
+        </button>
+      </div>
+
+      <div id="pc-area" class="hidden">
+        <button id="screen-btn">
+          画面キャプチャして認識
+        </button>
+
+        <input type="file" id="upload" accept="image/*">
+
+        <p>
+          Ctrl+V / Cmd+V で画像貼り付け可能
+        </p>
+      </div>
+
     </div>
 
-    <div id="pc-area" class="hidden">
-      <button id="screen-btn">
-        画面キャプチャして認識
-      </button>
-
-      <input
-        type="file"
-        id="upload"
-        accept="image/*"
-      >
-
-      <p>
-        Ctrl+V / Cmd+V で画像貼り付け可能
-      </p>
+    <div id="loading" class="hidden">
+      認識中...
     </div>
+
+    <div id="result"></div>
 
   </div>
 
-  <div id="loading" class="hidden">
-    認識中...
-  </div>
-
-  <div id="result"></div>
-
-</div>
-
-<script async src="https://docs.opencv.org/4.x/opencv.js"></script>
-<script src="script.js"></script>
+  <script async src="https://docs.opencv.org/4.x/opencv.js"></script>
+  <script src="script.js"></script>
 </body>
+
 </html>
