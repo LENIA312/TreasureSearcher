@@ -124,6 +124,17 @@ async function startCamera() {
 
     video.srcObject = stream
 
+    const guide =
+  document.getElementById(
+    'camera-guide'
+  )
+
+if (guide) {
+  guide.classList.remove(
+    'hidden'
+  )
+}
+
     captureBtn.classList.remove(
       'hidden'
     )
@@ -341,6 +352,24 @@ async function search(blob) {
         ${(bestScore * 100)
           .toFixed(1)}%
       </p>
+
+      // 結果までスクロール
+result.scrollIntoView({
+  behavior: 'smooth',
+  block: 'start'
+})
+
+// グレーアウト解除
+const guide =
+  document.getElementById(
+    'camera-guide'
+  )
+
+if (guide) {
+  guide.classList.add(
+    'hidden'
+  )
+}
     `
 
   } catch (err) {
