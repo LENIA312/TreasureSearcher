@@ -96,15 +96,62 @@ async function startCamera() {
 
 // スマホ 撮影
 async function capturePhoto() {
+  const guide =
+    document.getElementById(
+      'camera-guide'
+    )
+
+  const videoRect =
+    video.getBoundingClientRect()
+
+  const guideRect =
+    guide.getBoundingClientRect()
+
+  // video実サイズ比率
+  const scaleX =
+    video.videoWidth /
+    videoRect.width
+
+  const scaleY =
+    video.videoHeight /
+    videoRect.height
+
+  // guide位置をvideo座標へ変換
+  const sx =
+    (guideRect.left - videoRect.left)
+    * scaleX
+
+  const sy =
+    (guideRect.top - videoRect.top)
+    * scaleY
+
+  const sw =
+    guideRect.width * scaleX
+
+  const sh =
+    guideRect.height * scaleY
+
+  // crop canvas
   const canvas =
     document.createElement('canvas')
 
-  canvas.width = video.videoWidth
-  canvas.height = video.videoHeight
+  canvas.width = 333
+  canvas.height = 282
 
-  const ctx = canvas.getContext('2d')
+  const ctx =
+    canvas.getContext('2d')
 
-  ctx.drawImage(video, 0, 0)
+  ctx.drawImage(
+    video,
+    sx,
+    sy,
+    sw,
+    sh,
+    0,
+    0,
+    333,
+    282
+  )
 
   canvas.toBlob(blob => {
     search(blob)
