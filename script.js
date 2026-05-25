@@ -24,77 +24,120 @@ const captureBtn =
 let stream = null
 let items = []
 
+async function waitForOpenCV() {
+  return new Promise(resolve => {
+    const check = () => {
+      if (
+        window.cv &&
+        cv.imread
+      ) {
+        resolve()
+      } else {
+        setTimeout(check, 100)
+      }
+    }
+
+    check()
+  })
+}
+
 async function init() {
+  await waitForOpenCV()
+
   const res =
     await fetch('./data/items.json')
 
   items = await res.json()
 
-  if (isMobile) {
-    mobileArea.classList.remove('hidden')
-  } else {
-    pcArea.classList.remove('hidden')
-  }
+  // 両方表示
+  mobileArea.classList.remove('hidden')
+  pcArea.classList.remove('hidden')
 }
 
 init()
 
-// スマホ カメラ開始
+// カメラ開始
 document
   .getElementById('camera-btn')
-  ?.addEventListener('click', startCamera)
+  ?.addEventListener(
+    'click',
+    startCamera
+  )
 
-// スマホ 撮影
+// 撮影
 document
   .getElementById('capture-btn')
-  ?.addEventListener('click', capturePhoto)
-
-// PC スクリーンキャプチャ
-document
-  .getElementById('screen-btn')
-  ?.addEventListener('click', captureScreen)
+  ?.addEventListener(
+    'click',
+    capturePhoto
+  )
 
 // 画像アップロード
 document
   .getElementById('upload')
-  ?.addEventListener('change', async e => {
-    const file = e.target.files[0]
-
-    if (file) {
-      search(file)
-    }
-  })
-
-// クリップボード貼り付け
-window.addEventListener('paste', async e => {
-  const items = e.clipboardData.items
-
-  for (const item of items) {
-    if (item.type.startsWith('image')) {
-      const file = item.getAsFile()
+  ?.addEventListener(
+    'change',
+    async e => {
+      const file =
+        e.target.files[0]
 
       if (file) {
         search(file)
       }
     }
-  }
-})
+  )
 
-// スマホ カメラ起動
-async function startCamera() {
-  stream =
-    await navigator.mediaDevices.getUserMedia({
-      video: {
-        facingMode: 'environment'
+// Ctrl+V
+window.addEventListener(
+  'paste',
+  async e => {
+    const clipboardItems =
+      e.clipboardData.items
+
+    for (const item of clipboardItems) {
+      if (
+        item.type.startsWith(
+          'image'
+        )
+      ) {
+        const file =
+          item.getAsFile()
+
+        if (file) {
+          search(file)
+        }
       }
-    })
+    }
+  }
+)
 
-  video.srcObject = stream
+// カメラ起動
+async function startCamera() {
+  try {
+    stream =
+      await navigator.mediaDevices.getUserMedia({
+        video: {
+          facingMode:
+            'environment'
+        }
+      })
 
-  captureBtn.classList.remove('hidden')
+    video.srcObject = stream
+
+    captureBtn.classList.remove(
+      'hidden'
+    )
+
+  } catch (err) {
+    console.error(err)
+
+    alert(
+      'カメラ起動に失敗しました'
+    )
+  }
 }
 
-// スマホ 撮影
+// 撮影
 async function capturePhoto() {
   const guide =
     document.getElementById(
@@ -116,24 +159,32 @@ async function capturePhoto() {
     video.videoHeight /
     videoRect.height
 
-  // guide位置をvideo座標へ変換
+  // guide位置
   const sx =
-    (guideRect.left - videoRect.left)
-    * scaleX
+    (
+      guideRect.left -
+      videoRect.left
+    ) * scaleX
 
   const sy =
-    (guideRect.top - videoRect.top)
-    * scaleY
+    (
+      guideRect.top -
+      videoRect.top
+    ) * scaleY
 
   const sw =
-    guideRect.width * scaleX
+    guideRect.width *
+    scaleX
 
   const sh =
-    guideRect.height * scaleY
+    guideRect.height *
+    scaleY
 
-  // crop canvas
+  // crop
   const canvas =
-    document.createElement('canvas')
+    document.createElement(
+      'canvas'
+    )
 
   canvas.width = 333
   canvas.height = 282
@@ -154,299 +205,221 @@ async function capturePhoto() {
   )
 
   canvas.toBlob(blob => {
-    search(blob)
-  })
-}
-
-// PC 範囲選択キャプチャ
-async function captureScreen() {
-  const displayStream =
-    await navigator.mediaDevices.getDisplayMedia({
-      video: true
-    })
-
-  const tempVideo =
-    document.createElement('video')
-
-  tempVideo.srcObject = displayStream
-
-  await tempVideo.play()
-
-  // 元スクリーン保存
-  const sourceCanvas =
-    document.createElement('canvas')
-
-  sourceCanvas.width =
-    tempVideo.videoWidth
-
-  sourceCanvas.height =
-    tempVideo.videoHeight
-
-  const sourceCtx =
-    sourceCanvas.getContext('2d')
-
-  sourceCtx.drawImage(
-    tempVideo,
-    0,
-    0
-  )
-
-  // overlay
-  const overlay =
-    document.createElement('div')
-
-  overlay.style.position = 'fixed'
-  overlay.style.left = '0'
-  overlay.style.top = '0'
-  overlay.style.width = '100vw'
-  overlay.style.height = '100vh'
-  overlay.style.zIndex = '999999'
-  overlay.style.cursor = 'crosshair'
-  overlay.style.background =
-    'rgba(0,0,0,0.3)'
-
-  document.body.appendChild(overlay)
-
-  // 選択枠
-  const box =
-    document.createElement('div')
-
-  box.style.position = 'absolute'
-  box.style.border =
-    '2px solid white'
-
-  overlay.appendChild(box)
-
-  let startX = 0
-  let startY = 0
-  let selecting = false
-
-  overlay.addEventListener('mousedown', e => {
-    selecting = true
-
-    startX = e.clientX
-    startY = e.clientY
-
-    box.style.left = startX + 'px'
-    box.style.top = startY + 'px'
-    box.style.width = '0px'
-    box.style.height = '0px'
-  })
-
-  overlay.addEventListener('mousemove', e => {
-    if (!selecting) return
-
-    const currentX = e.clientX
-    const currentY = e.clientY
-
-    const x =
-      Math.min(startX, currentX)
-
-    const y =
-      Math.min(startY, currentY)
-
-    const w =
-      Math.abs(currentX - startX)
-
-    const h =
-      Math.abs(currentY - startY)
-
-    box.style.left = x + 'px'
-    box.style.top = y + 'px'
-    box.style.width = w + 'px'
-    box.style.height = h + 'px'
-  })
-
-  overlay.addEventListener('mouseup', e => {
-    if (!selecting) return
-
-    selecting = false
-
-    const endX = e.clientX
-    const endY = e.clientY
-
-    const x =
-      Math.min(startX, endX)
-
-    const y =
-      Math.min(startY, endY)
-
-    const w =
-      Math.abs(endX - startX)
-
-    const h =
-      Math.abs(endY - startY)
-
-    overlay.remove()
-
-    // 切り抜き
-    const cropCanvas =
-      document.createElement('canvas')
-
-    cropCanvas.width = w
-    cropCanvas.height = h
-
-    const cropCtx =
-      cropCanvas.getContext('2d')
-
-    const scaleX =
-      sourceCanvas.width /
-      window.innerWidth
-
-    const scaleY =
-      sourceCanvas.height /
-      window.innerHeight
-
-    cropCtx.drawImage(
-      sourceCanvas,
-      x * scaleX,
-      y * scaleY,
-      w * scaleX,
-      h * scaleY,
-      0,
-      0,
-      w,
-      h
-    )
-
-    cropCanvas.toBlob(blob => {
-      if (blob) {
-        search(blob)
-      }
-    })
-
-    // stream停止
-    displayStream
-      .getTracks()
-      .forEach(track => track.stop())
+    if (blob) {
+      search(blob)
+    }
   })
 }
 
 // 検索処理
 async function search(blob) {
-  loading.classList.remove('hidden')
-
-  const queryHash =
-    await createHash(blob)
-
-  let bestItem = null
-  let bestScore = Infinity
-
-  for (const item of items) {
-    const res =
-      await fetch(item.image)
-
-    const itemBlob =
-      await res.blob()
-
-    const itemHash =
-      await createHash(itemBlob)
-
-    const score =
-      hammingDistance(
-        queryHash,
-        itemHash
-      )
-
-    if (score < bestScore) {
-      bestScore = score
-      bestItem = item
-    }
-  }
-
-  loading.classList.add('hidden')
-
-  if (bestScore > 20) {
-    result.innerHTML =
-      '<p>該当なし</p>'
-
-    return
-  }
-
-  result.innerHTML = `
-    <img
-      src="${bestItem.image}"
-      class="result-image"
-    >
-
-    <h2>${bestItem.name}</h2>
-
-    <p>${bestItem.description}</p>
-
-    <small>${bestItem.detail}</small>
-  `
-}
-
-// average hash
-async function createHash(blob) {
-  const bitmap =
-    await createImageBitmap(blob)
-
-  const canvas =
-    document.createElement('canvas')
-
-  canvas.width = 32
-  canvas.height = 32
-
-  const ctx = canvas.getContext('2d')
-
-  ctx.drawImage(
-    bitmap,
-    0,
-    0,
-    32,
-    32
+  loading.classList.remove(
+    'hidden'
   )
 
-  const imageData =
-    ctx.getImageData(
+  result.innerHTML =
+    '<p>検索中...</p>'
+
+  try {
+    const queryBitmap =
+      await createImageBitmap(
+        blob
+      )
+
+    const queryCanvas =
+      document.createElement(
+        'canvas'
+      )
+
+    queryCanvas.width =
+      queryBitmap.width
+
+    queryCanvas.height =
+      queryBitmap.height
+
+    const qctx =
+      queryCanvas.getContext(
+        '2d'
+      )
+
+    qctx.drawImage(
+      queryBitmap,
       0,
-      0,
-      32,
-      32
-    )
-
-  const pixels =
-    imageData.data
-
-  const gray = []
-
-  for (
-    let i = 0;
-    i < pixels.length;
-    i += 4
-  ) {
-    gray.push(
-      (
-        pixels[i] +
-        pixels[i + 1] +
-        pixels[i + 2]
-      ) / 3
-    )
-  }
-
-  const avg =
-    gray.reduce(
-      (a, b) => a + b,
       0
-    ) / gray.length
-
-  return gray
-    .map(v =>
-      v >= avg ? '1' : '0'
     )
-    .join('')
+
+    let bestItem = null
+    let bestScore = 0
+
+    for (const item of items) {
+      const img = new Image()
+
+      img.src = item.image
+
+      await img.decode()
+
+      const templateCanvas =
+        document.createElement(
+          'canvas'
+        )
+
+      templateCanvas.width =
+        img.width
+
+      templateCanvas.height =
+        img.height
+
+      const tctx =
+        templateCanvas.getContext(
+          '2d'
+        )
+
+      tctx.drawImage(
+        img,
+        0,
+        0
+      )
+
+      const score =
+        await templateMatch(
+          queryCanvas,
+          templateCanvas
+        )
+
+      console.log(
+        item.name,
+        score
+      )
+
+      if (
+        score > bestScore
+      ) {
+        bestScore = score
+        bestItem = item
+      }
+    }
+
+    loading.classList.add(
+      'hidden'
+    )
+
+    console.log(
+      'BEST SCORE',
+      bestScore
+    )
+
+    // 閾値
+    if (
+      bestScore < 0.45
+    ) {
+      result.innerHTML =
+        '<p>該当なし</p>'
+
+      return
+    }
+
+    result.innerHTML = `
+      <img
+        src="${bestItem.image}"
+        class="result-image"
+      >
+
+      <h2>
+        ${bestItem.name}
+      </h2>
+
+      <p>
+        ${bestItem.description}
+      </p>
+
+      <small>
+        ${bestItem.detail}
+      </small>
+
+      <p>
+        一致率:
+        ${(bestScore * 100)
+          .toFixed(1)}%
+      </p>
+    `
+
+  } catch (err) {
+    console.error(err)
+
+    loading.classList.add(
+      'hidden'
+    )
+
+    result.innerHTML =
+      '<p>検索エラー</p>'
+  }
 }
 
-// ハミング距離
-function hammingDistance(a, b) {
-  let distance = 0
+// OpenCV template matching
+async function templateMatch(
+  sourceCanvas,
+  templateCanvas
+) {
+  return new Promise(resolve => {
 
-  for (let i = 0; i < a.length; i++) {
-    if (a[i] !== b[i]) {
-      distance++
+    const src =
+      cv.imread(sourceCanvas)
+
+    const templ =
+      cv.imread(templateCanvas)
+
+    // 結果サイズ
+    const resultCols =
+      src.cols -
+      templ.cols +
+      1
+
+    const resultRows =
+      src.rows -
+      templ.rows +
+      1
+
+    // テンプレが大きい場合
+    if (
+      resultCols <= 0 ||
+      resultRows <= 0
+    ) {
+      src.delete()
+      templ.delete()
+
+      resolve(0)
+      return
     }
-  }
 
-  return distance
+    const result =
+      new cv.Mat()
+
+    result.create(
+      resultRows,
+      resultCols,
+      cv.CV_32FC1
+    )
+
+    // マッチング
+    cv.matchTemplate(
+      src,
+      templ,
+      result,
+      cv.TM_CCOEFF_NORMED
+    )
+
+    const mm =
+      cv.minMaxLoc(
+        result
+      )
+
+    const score =
+      mm.maxVal
+
+    src.delete()
+    templ.delete()
+    result.delete()
+
+    resolve(score)
+  })
 }
