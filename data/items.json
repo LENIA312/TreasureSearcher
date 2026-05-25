@@ -1,23 +1,9 @@
 [
   {
-    "id": "item001",
-    "name": "サンプル赤",
-    "image": "./assets/item001.jpg",
-    "description": "赤いサンプル画像",
-    "detail": "GitHub Pages用サンプル"
-  },
-  {
-    "id": "item002",
-    "name": "サンプル青",
-    "image": "./assets/item002.jpg",
-    "description": "青いサンプル画像",
-    "detail": "GitHub Pages用サンプル"
-  },
-  {
     "id": "herite6",
-    "name": "サンプル青",
+    "name": "X:26.3 Y:30.8 Z:1.3",
     "image": "./assets/herite6.png",
-    "description": "青いサンプル画像",
-    "detail": "GitHub Pages用サンプル"
+    "description": "ヘリテージファウンド",
+    "detail": ""
   }
 ]
