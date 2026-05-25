@@ -12,5 +12,12 @@
     "image": "./assets/item002.jpg",
     "description": "青いサンプル画像",
     "detail": "GitHub Pages用サンプル"
+  },
+  {
+    "id": "herite6",
+    "name": "サンプル青",
+    "image": "./assets/herite6.png",
+    "description": "青いサンプル画像",
+    "detail": "GitHub Pages用サンプル"
   }
 ]
