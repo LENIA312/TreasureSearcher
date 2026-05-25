@@ -331,7 +331,7 @@ async function search(blob) {
         )
 
       console.log(
-        item.name,
+        item.position,
         score
       )
 
