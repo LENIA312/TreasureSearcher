@@ -370,7 +370,7 @@ async function search(blob) {
 
     // 閾値
     if (
-      bestScore < 0.45
+      bestScore < 0.75
     ) {
 
       result.innerHTML =
@@ -452,63 +452,93 @@ async function templateMatch(
 
   return new Promise(resolve => {
 
-    const src =
+    // source
+    let src =
       cv.imread(sourceCanvas)
 
-    const templ =
+    // template
+    let templ =
       cv.imread(templateCanvas)
 
-    // templateが大きいとエラー
-    const resultCols =
-      src.cols -
-      templ.cols +
-      1
+    // サイズ統一
+    const targetWidth = 333
+    const targetHeight = 282
 
-    const resultRows =
-      src.rows -
-      templ.rows +
-      1
+    const srcResized =
+      new cv.Mat()
 
-    if (
-      resultCols <= 0 ||
-      resultRows <= 0
-    ) {
+    const templResized =
+      new cv.Mat()
 
-      src.delete()
-      templ.delete()
+    cv.resize(
+      src,
+      srcResized,
+      new cv.Size(
+        targetWidth,
+        targetHeight
+      )
+    )
 
-      resolve(0)
+    cv.resize(
+      templ,
+      templResized,
+      new cv.Size(
+        targetWidth,
+        targetHeight
+      )
+    )
 
-      return
-    }
+    // grayscale
+    cv.cvtColor(
+      srcResized,
+      srcResized,
+      cv.COLOR_RGBA2GRAY
+    )
+
+    cv.cvtColor(
+      templResized,
+      templResized,
+      cv.COLOR_RGBA2GRAY
+    )
+
+    // edge化
+    cv.Canny(
+      srcResized,
+      srcResized,
+      50,
+      150
+    )
+
+    cv.Canny(
+      templResized,
+      templResized,
+      50,
+      150
+    )
 
     const result =
       new cv.Mat()
 
-    result.create(
-      resultRows,
-      resultCols,
-      cv.CV_32FC1
-    )
-
-    // マッチング
     cv.matchTemplate(
-      src,
-      templ,
+      srcResized,
+      templResized,
       result,
       cv.TM_CCOEFF_NORMED
     )
 
     const mm =
-      cv.minMaxLoc(
-        result
-      )
+      cv.minMaxLoc(result)
 
     const score =
       mm.maxVal
 
+    // cleanup
     src.delete()
     templ.delete()
+
+    srcResized.delete()
+    templResized.delete()
+
     result.delete()
 
     resolve(score)
