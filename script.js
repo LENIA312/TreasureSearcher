@@ -24,8 +24,13 @@ const captureBtn =
 let stream = null
 let items = []
 
+// 一致後ロック
+let foundLocked = false
+
+// OpenCV読み込み待機
 async function waitForOpenCV() {
   return new Promise(resolve => {
+
     const check = () => {
       if (
         window.cv &&
@@ -41,6 +46,7 @@ async function waitForOpenCV() {
   })
 }
 
+// 初期化
 async function init() {
   await waitForOpenCV()
 
@@ -50,8 +56,13 @@ async function init() {
   items = await res.json()
 
   // 両方表示
-  mobileArea.classList.remove('hidden')
-  pcArea.classList.remove('hidden')
+  mobileArea.classList.remove(
+    'hidden'
+  )
+
+  pcArea.classList.remove(
+    'hidden'
+  )
 }
 
 init()
@@ -72,12 +83,13 @@ document
     capturePhoto
   )
 
-// 画像アップロード
+// アップロード
 document
   .getElementById('upload')
   ?.addEventListener(
     'change',
     async e => {
+
       const file =
         e.target.files[0]
 
@@ -91,15 +103,18 @@ document
 window.addEventListener(
   'paste',
   async e => {
+
     const clipboardItems =
       e.clipboardData.items
 
     for (const item of clipboardItems) {
+
       if (
         item.type.startsWith(
           'image'
         )
       ) {
+
         const file =
           item.getAsFile()
 
@@ -114,6 +129,23 @@ window.addEventListener(
 // カメラ起動
 async function startCamera() {
   try {
+
+    // ロック解除
+    foundLocked = false
+
+    const guide =
+      document.getElementById(
+        'camera-guide'
+      )
+
+    if (guide) {
+      guide.classList.remove(
+        'hidden'
+      )
+    }
+
+    result.innerHTML = ''
+
     stream =
       await navigator.mediaDevices.getUserMedia({
         video: {
@@ -124,22 +156,12 @@ async function startCamera() {
 
     video.srcObject = stream
 
-    const guide =
-  document.getElementById(
-    'camera-guide'
-  )
-
-if (guide) {
-  guide.classList.remove(
-    'hidden'
-  )
-}
-
     captureBtn.classList.remove(
       'hidden'
     )
 
   } catch (err) {
+
     console.error(err)
 
     alert(
@@ -150,6 +172,12 @@ if (guide) {
 
 // 撮影
 async function capturePhoto() {
+
+  // 一致後ロック
+  if (foundLocked) {
+    return
+  }
+
   const guide =
     document.getElementById(
       'camera-guide'
@@ -222,8 +250,9 @@ async function capturePhoto() {
   })
 }
 
-// 検索処理
+// 検索
 async function search(blob) {
+
   loading.classList.remove(
     'hidden'
   )
@@ -232,6 +261,7 @@ async function search(blob) {
     '<p>検索中...</p>'
 
   try {
+
     const queryBitmap =
       await createImageBitmap(
         blob
@@ -262,8 +292,11 @@ async function search(blob) {
     let bestItem = null
     let bestScore = 0
 
+    // 全件比較
     for (const item of items) {
-      const img = new Image()
+
+      const img =
+        new Image()
 
       img.src = item.image
 
@@ -323,11 +356,15 @@ async function search(blob) {
     if (
       bestScore < 0.45
     ) {
+
       result.innerHTML =
         '<p>該当なし</p>'
 
       return
     }
+
+    // 一致後ロック
+    foundLocked = true
 
     result.innerHTML = `
       <img
@@ -352,27 +389,28 @@ async function search(blob) {
         ${(bestScore * 100)
           .toFixed(1)}%
       </p>
-
-      // 結果までスクロール
-result.scrollIntoView({
-  behavior: 'smooth',
-  block: 'start'
-})
-
-// グレーアウト解除
-const guide =
-  document.getElementById(
-    'camera-guide'
-  )
-
-if (guide) {
-  guide.classList.add(
-    'hidden'
-  )
-}
     `
 
+    // スクロール
+    result.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    })
+
+    // ガイド消す
+    const guide =
+      document.getElementById(
+        'camera-guide'
+      )
+
+    if (guide) {
+      guide.classList.add(
+        'hidden'
+      )
+    }
+
   } catch (err) {
+
     console.error(err)
 
     loading.classList.add(
@@ -389,6 +427,7 @@ async function templateMatch(
   sourceCanvas,
   templateCanvas
 ) {
+
   return new Promise(resolve => {
 
     const src =
@@ -397,7 +436,7 @@ async function templateMatch(
     const templ =
       cv.imread(templateCanvas)
 
-    // 結果サイズ
+    // templateが大きいとエラー
     const resultCols =
       src.cols -
       templ.cols +
@@ -408,15 +447,16 @@ async function templateMatch(
       templ.rows +
       1
 
-    // テンプレが大きい場合
     if (
       resultCols <= 0 ||
       resultRows <= 0
     ) {
+
       src.delete()
       templ.delete()
 
       resolve(0)
+
       return
     }
 
