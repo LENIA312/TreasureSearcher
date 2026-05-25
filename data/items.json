@@ -1,0 +1,16 @@
+[
+  {
+    "id": "item001",
+    "name": "サンプル赤",
+    "image": "./assets/item001.jpg",
+    "description": "赤いサンプル画像",
+    "detail": "GitHub Pages用サンプル"
+  },
+  {
+    "id": "item002",
+    "name": "サンプル青",
+    "image": "./assets/item002.jpg",
+    "description": "青いサンプル画像",
+    "detail": "GitHub Pages用サンプル"
+  }
+]

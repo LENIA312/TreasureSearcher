@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>画像検索MVP</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+  <h1>画像検索MVP</h1>
+
+  <div class="panel">
+
+    <div id="mobile-area" class="hidden">
+      <button id="camera-btn">
+        カメラ撮影を開始
+      </button>
+
+      <video
+        id="video"
+        autoplay
+        playsinline
+      ></video>
+
+      <button id="capture-btn" class="hidden">
+        撮影して認識
+      </button>
+    </div>
+
+    <div id="pc-area" class="hidden">
+      <button id="screen-btn">
+        画面キャプチャして認識
+      </button>
+
+      <input
+        type="file"
+        id="upload"
+        accept="image/*"
+      >
+
+      <p>
+        Ctrl+V / Cmd+V で画像貼り付け可能
+      </p>
+    </div>
+
+  </div>
+
+  <div id="loading" class="hidden">
+    認識中...
+  </div>
+
+  <div id="result"></div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
