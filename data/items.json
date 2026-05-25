@@ -1,5 +1,261 @@
 [
   {
+    "id": "oruko1",
+    "position": "①(X:13.7 Y:14.2 Z:1.7)",
+    "image": "./assets/oruko1.png",
+    "description": "オルコ・パチャ",
+    "detail": "G17",
+    "mapImage": "./assets/oruko.jpg"
+  },
+  {
+    "id": "oruko2",
+    "position": "②(X:17.0 Y:23.3 Z:2.8)",
+    "image": "./assets/oruko2.png",
+    "description": "オルコ・パチャ",
+    "detail": "G17",
+    "mapImage": "./assets/oruko.jpg"
+  },
+  {
+    "id": "oruko3",
+    "position": "③(X:15.8 Y:30.6 Z:2.9)",
+    "image": "./assets/oruko3.png",
+    "description": "オルコ・パチャ",
+    "detail": "G17",
+    "mapImage": "./assets/oruko.jpg"
+  },
+  {
+    "id": "oruko4",
+    "position": "④(X:21.6 Y:23.9 Z:2.3)",
+    "image": "./assets/oruko4.png",
+    "description": "オルコ・パチャ",
+    "detail": "G17",
+    "mapImage": "./assets/oruko.jpg"
+  },
+  {
+    "id": "oruko5",
+    "position": "⑤(X:21.6 Y:26.0 Z:2.4)",
+    "image": "./assets/oruko5.png",
+    "description": "オルコ・パチャ",
+    "detail": "G17",
+    "mapImage": "./assets/oruko.jpg"
+  },
+  {
+    "id": "oruko6",
+    "position": "⑥(X:29.0 Y:24.0 Z:2.8)",
+    "image": "./assets/oruko6.png",
+    "description": "オルコ・パチャ",
+    "detail": "G17",
+    "mapImage": "./assets/oruko.jpg"
+  },
+  {
+    "id": "oruko7",
+    "position": "⑦(X:34.1 Y:29.0 Z:3.4)",
+    "image": "./assets/oruko7.png",
+    "description": "オルコ・パチャ",
+    "detail": "G17",
+    "mapImage": "./assets/oruko.jpg"
+  },
+  {
+    "id": "oruko8",
+    "position": "⑧(X:34.2 Y:32.5 Z:3.3)",
+    "image": "./assets/oruko8.png",
+    "description": "オルコ・パチャ",
+    "detail": "G17",
+    "mapImage": "./assets/oruko.jpg"
+  },
+  {
+    "id": "kozamaru1",
+    "position": "①(X:6.8 Y:19.4 Z:0.6)",
+    "image": "./assets/kozamaru1.jpg",
+    "description": "コザマル・カ",
+    "detail": "G17",
+    "mapImage": "./assets/kozamaru.jpg"
+  },
+  {
+    "id": "kozamaru2",
+    "position": "②(X:9.0 Y:33.9 Z:1.3)",
+    "image": "./assets/kozamaru2.png",
+    "description": "コザマル・カ",
+    "detail": "G17",
+    "mapImage": "./assets/kozamaru.jpg"
+  },
+  {
+    "id": "kozamaru3",
+    "position": "③(X:20.0 Y:6.9 Z:0.2)",
+    "image": "./assets/kozamaru3.jpg",
+    "description": "コザマル・カ",
+    "detail": "G17",
+    "mapImage": "./assets/kozamaru.jpg"
+  },
+  {
+    "id": "kozamaru4",
+    "position": "④(X:18.9 Y:22.5 Z:1.1)",
+    "image": "./assets/kozamaru4.png",
+    "description": "コザマル・カ",
+    "detail": "G17",
+    "mapImage": "./assets/kozamaru.jpg"
+  },
+  {
+    "id": "kozamaru5",
+    "position": "⑤(X:31.3 Y:14.9 Z0.1)",
+    "image": "./assets/kozamaru5.png",
+    "description": "コザマル・カ",
+    "detail": "G17",
+    "mapImage": "./assets/kozamaru.jpg"
+  },
+  {
+    "id": "kozamaru6",
+    "position": "⑥(X:32.2 Y:36.1 Z:1.2)",
+    "image": "./assets/kozamaru6.png",
+    "description": "コザマル・カ",
+    "detail": "G17",
+    "mapImage": "./assets/kozamaru.jpg"
+  },
+  {
+    "id": "kozamaru7",
+    "position": "⑦(X:36.8 Y:6.2 Z:0.4)",
+    "image": "./assets/kozamaru7.jpg",
+    "description": "コザマル・カ",
+    "detail": "G17",
+    "mapImage": "./assets/kozamaru.jpg"
+  },
+  {
+    "id": "kozamaru8",
+    "position": "⑧(X:37.9 Y:21.8 Z:0.2)",
+    "image": "./assets/kozamaru8.png",
+    "description": "コザマル・カ",
+    "detail": "G17",
+    "mapImage": "./assets/kozamaru.jpg"
+  },
+  {
+    "id": "yakuteru1",
+    "position": "①(X:5.6 Y:19.6 Z:3.3)",
+    "image": "./assets/yakuteru1.png",
+    "description": "ヤクテル樹海",
+    "detail": "G17",
+    "mapImage": "./assets/yakuteru.jpg"
+  },
+  {
+    "id": "yakuteru2",
+    "position": "②(X:11.3 Y:33.2 Z:1.4)",
+    "image": "./assets/yakuteru2.png",
+    "description": "ヤクテル樹海",
+    "detail": "G17",
+    "mapImage": "./assets/yakuteru.jpg"
+  },
+  {
+    "id": "yakuteru3",
+    "position": "③(X:15.5 Y:26.8 Z:1.3)",
+    "image": "./assets/yakuteru3.png",
+    "description": "ヤクテル樹海",
+    "detail": "G17",
+    "mapImage": "./assets/yakuteru.jpg"
+  },
+  {
+    "id": "yakuteru4",
+    "position": "④(X:22.6 Y:5.7 Z3.0)",
+    "image": "./assets/yakuteru4.png",
+    "description": "ヤクテル樹海",
+    "detail": "G17",
+    "mapImage": "./assets/yakuteru.jpg"
+  },
+  {
+    "id": "yakuteru5",
+    "position": "⑤(X:24.7 Y:21.0 Z:1.4)",
+    "image": "./assets/yakuteru5.png",
+    "description": "ヤクテル樹海",
+    "detail": "G17",
+    "mapImage": "./assets/yakuteru.jpg"
+  },
+  {
+    "id": "yakuteru6",
+    "position": "⑥(X:22.7 Y:35.9 Z:1.3)",
+    "image": "./assets/yakuteru6.png",
+    "description": "ヤクテル樹海",
+    "detail": "G17",
+    "mapImage": "./assets/yakuteru.jpg"
+  },
+  {
+    "id": "yakuteru7",
+    "position": "⑦(X:31.2 Y:21.9 Z:3.1)",
+    "image": "./assets/yakuteru7.png",
+    "description": "ヤクテル樹海",
+    "detail": "G17",
+    "mapImage": "./assets/yakuteru.jpg"
+  },
+  {
+    "id": "yakuteru8",
+    "position": "⑧(X:36.7 Y:12.5 Z3.3)",
+    "image": "./assets/yakuteru8.png",
+    "description": "ヤクテル樹海",
+    "detail": "G17",
+    "mapImage": "./assets/yakuteru.jpg"
+  },
+  {
+    "id": "sharo1",
+    "position": "①(X:12.5 Y:14.3 Z0.5)",
+    "image": "./assets/sharo1.png",
+    "description": "シャーローニ荒野",
+    "detail": "G17",
+    "mapImage": "./assets/sharo.jpg"
+  },
+  {
+    "id": "sharo2",
+    "position": "②(X18.5 Y11.5 Z0.9)",
+    "image": "./assets/sharo2.png",
+    "description": "シャーローニ荒野",
+    "detail": "G17",
+    "mapImage": "./assets/sharo.jpg"
+  },
+  {
+    "id": "sharo3",
+    "position": "③(X:18.2 Y:21.0 Z:0.9)",
+    "image": "./assets/sharo3.png",
+    "description": "シャーローニ荒野",
+    "detail": "G17",
+    "mapImage": "./assets/sharo.jpg"
+  },
+  {
+    "id": "sharo4",
+    "position": "④(X:19.6 Y:34.5 Z:0.5)",
+    "image": "./assets/sharo4.png",
+    "description": "シャーローニ荒野",
+    "detail": "G17",
+    "mapImage": "./assets/sharo.jpg"
+  },
+  {
+    "id": "sharo5",
+    "position": "⑤(X:25.6 Y:19.6 Z:0.7)",
+    "image": "./assets/sharo5.png",
+    "description": "シャーローニ荒野",
+    "detail": "G17",
+    "mapImage": "./assets/sharo.jpg"
+  },
+  {
+    "id": "sharo6",
+    "position": "⑥(X:29.3 Y:8.3 Z:0.5)",
+    "image": "./assets/sharo6.png",
+    "description": "シャーローニ荒野",
+    "detail": "G17",
+    "mapImage": "./assets/sharo.jpg"
+  },
+  {
+    "id": "sharo7",
+    "position": "⑦(X:31.8 Y:32.9 Z:0.9)",
+    "image": "./assets/sharo7.png",
+    "description": "シャーローニ荒野",
+    "detail": "G17",
+    "mapImage": "./assets/sharo.jpg"
+  },
+  {
+    "id": "sharo8",
+    "position": "⑧(X:35.5 Y:16.8Z:0.6)",
+    "image": "./assets/sharo8.png",
+    "description": "シャーローニ荒野",
+    "detail": "G17",
+    "mapImage": "./assets/sharo.jpg"
+  },
+  {
     "id": "herite1",
     "position": "①(X:9.1 Y:21.3 Z:0.3)",
     "image": "./assets/herite1.png",
@@ -40,7 +296,7 @@
     "mapImage": "./assets/herite.jpg"
   },
   {
-    "id": "herite5",
+    "id": "herite6",
     "position": "⑥(X:26.3 Y:30.8 Z:1.3)",
     "image": "./assets/herite6.png",
     "description": "ヘリテージファウンド",
@@ -48,7 +304,7 @@
     "mapImage": "./assets/herite.jpg"
   },
   {
-    "id": "herite5",
+    "id": "herite7",
     "position": "⑦(X:31.1 Y:8.3 Z:1.4)",
     "image": "./assets/herite7.png",
     "description": "ヘリテージファウンド",
@@ -56,11 +312,75 @@
     "mapImage": "./assets/herite.jpg"
   },
   {
-    "id": "herite5",
+    "id": "herite8",
     "position": "⑧(X:35.7 Y:25.5 Z:1.6)",
     "image": "./assets/herite8.png",
     "description": "ヘリテージファウンド",
     "detail": "G17",
     "mapImage": "./assets/herite.jpg"
+  },
+  {
+    "id": "memory1",
+    "position": "①(X:9.3 , Y:10.5)",
+    "image": "./assets/memory1.png",
+    "description": "リビングメモリー",
+    "detail": "G18",
+    "mapImage": "./assets/memory.png"
+  },
+  {
+    "id": "memory2",
+    "position": "②(X:10.3 , Y:35.9)",
+    "image": "./assets/memory2.png",
+    "description": "リビングメモリー",
+    "detail": "G18",
+    "mapImage": "./assets/memory.png"
+  },
+  {
+    "id": "memory3",
+    "position": "③(X:18.6 , Y:15.8)",
+    "image": "./assets/memory3.png",
+    "description": "リビングメモリー",
+    "detail": "G18",
+    "mapImage": "./assets/memory.png"
+  },
+  {
+    "id": "memory4",
+    "position": "④(X:20.2 , Y:23.0)",
+    "image": "./assets/memory4.png",
+    "description": "リビングメモリー",
+    "detail": "G18",
+    "mapImage": "./assets/memory.png"
+  },
+  {
+    "id": "memory5",
+    "position": "⑤(X:25.0 , Y:6.9)",
+    "image": "./assets/memory5.png",
+    "description": "リビングメモリー",
+    "detail": "G18",
+    "mapImage": "./assets/memory.png"
+  },
+  {
+    "id": "memory6",
+    "position": "⑥(X:31.0 , Y:18.1)",
+    "image": "./assets/memory6.png",
+    "description": "リビングメモリー",
+    "detail": "G18",
+    "mapImage": "./assets/memory.png"
+  },
+  {
+    "id": "memory7",
+    "position": "⑦(X:38.5 , Y:28.1)",
+    "image": "./assets/memory7.png",
+    "description": "リビングメモリー",
+    "detail": "G18",
+    "mapImage": "./assets/memory.png"
+  },
+  {
+    "id": "memory8",
+    "position": "⑧(X:35.0 , Y:35.3)",
+    "image": "./assets/memory8.png",
+    "description": "リビングメモリー",
+    "detail": "G18",
+    "mapImage": "./assets/memory.png"
   }
 ]
